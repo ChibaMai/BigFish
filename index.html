@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>大鱼吃小鱼</title>
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+<div class="app">
+  <div class="details">
+    <h4>大鱼吃食物</h4>
+  </div>
+  <div class="allcanvas">
+    <!-- 画布一 -->
+    <canvas id="canvas1" width="800" height="600"></canvas>
+    <!-- 画布二 -->
+    <canvas id="canvas2" width="800" height="600"></canvas>
+  </div>
+</div>
+
+<script>
+  let allcanvas = document.getElementsByClassName("allcanvas")[0];
+  allcanvas.oncontextmenu = function (e) {
+    e.preventDefault();
+  }
+</script>
+
+<script src="js/back/ane.js"></script>
+<script src="index.js"></script>
+
+</body>
+</html>
