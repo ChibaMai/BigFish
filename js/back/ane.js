@@ -53,7 +53,7 @@ class aneObj {
     ctx2.strokeStyle = "purple";
     ctx2.globalAlpha = 0.6
     ctx2.lineCap = "round";
-    ctx2.lineWidth = 5;
+    ctx2.lineWidth = 8;
     // 遍历每个海葵
     for (let i = 0; i < this.num; i++){ 
       // 创建新路径
@@ -72,8 +72,7 @@ class aneObj {
     } // end for
     // 回复画笔状态
     ctx2.restore();
-    
-  };
+  }
 
   // 在 idnex.js 中创建海葵对象
   // 且调用相关相关方法

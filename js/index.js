@@ -7,25 +7,33 @@
 // 创建画布变量
 let canvas1,
   canvas2,
-
   // 创建两支画笔
   ctx1,
   ctx2,
-
   // 创建变量保存画布的宽度和高度
   canWidth,
   canHeight,
-
   // 创建全局变量爆粗两帧画面之间的时间差
   lastTime,
   // 时间差
   deltaTime,
-
   // 创建保存背景图片对象
   bgPic,
-
   // 创建全局变量保存海葵对象
-  ane;
+  ane,
+  // 创建全局对象保存食物对象
+  fruit,
+  // 创建全局对象保存大鱼对象
+  mom,
+  // 创建全局变量保存鼠标的位置
+  mx,
+  my,
+  // 使用全局变量保存分数对象
+  data,
+  // 使用全局变量保存吃掉食物的光环
+  wave,
+  // 使用全局变量保存小鱼对象
+  bady;
 
 // 创建函数 game
 function game() {
@@ -55,12 +63,35 @@ function init() {
   bgPic = new Image();
   bgPic.src = "src/background.jpg";
 
-  // 初始 ane 海葵对象
+  // 初始 ane 海葵对象调用初始化方法
   ane = new aneObj();
   ane.init();
 
-  console.log(ane);
+  // 创建 fruitObj 对象调用初始化方法
+  fruit = new fruitObj();
+  fruit.init();
   
+  // 创建 momObj 对象
+  mom = new momObj();
+  mom.init();
+  // 初始化 mx my 大鱼的位置
+  mx = canWidth * 0.5;
+  my = canHeight * 0.5;
+
+  // 为画布 1 绑定鼠标移动事件
+  canvas1.addEventListener("mousemove", handleMove);
+
+  // 创建 dataObj 对象
+  data = new dataObj();
+
+  // 创建 waveObj 对象
+  wave = new waveObj();
+  wave.init();
+
+  // 创建 badyObj 对象
+  bady = new badyObj();
+  bady.init();  
+
   return;
 }
 
@@ -81,9 +112,36 @@ function gameloop() {
   // 调用绘制海葵的方法
   ane.draw();
 
+  // 调用监听画布函数
+  fruitMonitor();
+  // 绘制食物
+  fruit.draw();
+
+  // 清除画布 1 所有的元素
+  ctx1.clearRect(0, 0, canWidth, canHeight);
+  // 绘制大鱼
+  mom.draw();
+
+  // 调用碰撞方法(及大鱼吃掉食物移除食物)
+  momFruitsCollison();
+
+  // 调用分数绘制方法
+  data.draw();
+
+  // 绘制光环
+  wave.draw();
+
+  // 绘制小鱼
+  bady.draw();
 
   return;
 }
 
 // 当网页加载成功后调用 game
-document.onload = game();
+document.body.onload = game;
+
+// 创建函数处理鼠标移动事件
+function handleMove(event) {
+  mx = event.offsetX;
+  my = event.offsetY;
+}
