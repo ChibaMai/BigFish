@@ -137,7 +137,6 @@ function gameloop() {
   return;
 }
 
-// 当网页加载成功后调用 game
 document.body.onload = game;
 
 // 创建函数处理鼠标移动事件
